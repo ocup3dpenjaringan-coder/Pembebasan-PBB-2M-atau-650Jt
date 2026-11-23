@@ -1,0 +1,617 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pembebasan PBB-P2 Jakarta 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Instrument+Serif:ital@0;1&family=Space+Grotesk:wght@400..700&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#0F1B2D;--card:#1B2B45;--paper:#F4F0E8;--panel:#FBF9F4;--coral:#FF8A4C;--mint:#5EE0B0;--deep:#B93A0A;--soft:#C5CEDB;--slate:#3B465A;--ease:cubic-bezier(.16,1,.3,1);--base:.55s}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;background:#070e19;overflow:hidden;font-family:'Inter',Arial,sans-serif}
+#stage{position:absolute;left:50%;top:50%;width:1920px;height:1080px;transform-origin:center center;overflow:hidden;background:var(--ink)}
+.slide{position:absolute;inset:0;display:none;flex-direction:column;justify-content:center;gap:28px;padding:128px 128px 160px;font-size:32px;overflow:hidden;isolation:isolate;z-index:1}
+.slide.active{display:flex;z-index:2}
+.slide.leaving{display:flex;z-index:1}
+.slide.active.next{animation:wipeNext 1s var(--ease) both}
+.slide.active.prev{animation:wipePrev 1s var(--ease) both}
+.slide.leaving{animation:leave 1s var(--ease) both}
+.dark{background:var(--ink);color:var(--paper)}
+.light{background:var(--paper);color:var(--ink)}
+.warm{background:var(--coral);color:var(--ink)}
+h1,h2,h3,.numtxt{font-family:'Space Grotesk',Arial,sans-serif;letter-spacing:-.02em}
+h1{font-size:132px;font-weight:700;line-height:1.05}
+h2{font-size:80px;font-weight:700;line-height:1.05}
+h3{font-size:44px;font-weight:600;line-height:1.1}
+.serif{font-family:'Instrument Serif',Georgia,serif;font-style:italic;font-weight:400;line-height:1.05;letter-spacing:0}
+.numtxt{font-weight:700;line-height:1;font-variant-numeric:tabular-nums}
+.eyebrow{display:flex;align-items:center;gap:18px;font-size:28px;font-weight:600;letter-spacing:6px;color:var(--mint);min-height:34px}
+.eyebrow::before{content:"";width:56px;height:3px;background:currentColor;transform-origin:left}
+.light .eyebrow{color:var(--deep)} .warm .eyebrow{color:var(--ink)}
+.lead{font-size:36px;line-height:1.4;color:var(--soft)}
+.light .lead{color:var(--slate)} .warm .lead{color:var(--ink)}
+.foot{position:absolute;left:128px;bottom:64px;font-size:24px;color:var(--soft)}
+.light .foot{color:var(--slate)} .warm .foot{color:var(--ink)}
+.col{width:1000px;display:flex;flex-direction:column;gap:28px}
+.row{display:flex;align-items:center;gap:80px}
+.pill{align-self:flex-start;font-size:32px;font-weight:600;padding:18px 40px;border-radius:64px}
+.pill-ink{background:var(--ink);color:var(--paper)}
+.pill-mint{background:var(--mint);color:var(--ink);animation:pulse 2.6s ease-out 2s infinite}
+.cards4{display:grid;grid-template-columns:repeat(4,392px);gap:32px}
+.card{position:relative;overflow:hidden;background:var(--card);border-radius:24px;padding:40px;display:flex;flex-direction:column;gap:20px}
+.card::before{content:"";position:absolute;left:0;right:0;top:0;height:8px;background:var(--coral);transform-origin:left}
+.card::after{content:"";position:absolute;top:0;bottom:0;width:120px;left:0;background:linear-gradient(100deg,transparent,rgba(255,255,255,.10),transparent);transform:translateX(-160%)}
+.card .cnum{font-size:80px;color:var(--coral)}
+.cdesc{font-size:30px;line-height:1.4;color:var(--soft)}
+.duo{display:grid;grid-template-columns:808px 808px;gap:48px}
+.blk{position:relative;border-radius:32px;padding:48px 64px;display:flex;flex-direction:column;gap:14px}
+.blk-a{background:var(--ink);color:var(--paper)} .blk-b{background:var(--coral);color:var(--ink)}
+.blk svg.ico{position:absolute;right:48px;top:48px;width:96px;height:96px}
+.tag{font-size:28px;font-weight:600;letter-spacing:5px}
+.blk-a .tag{color:var(--mint)}
+.num{font-size:112px}
+.note{font-size:32px;line-height:1.4}
+.scene{width:680px;height:200px;fill:none;stroke:currentColor;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;overflow:visible}
+.win{fill:#FFD166;stroke:none} .blk-b .win{fill:#FFF4C2}
+.smoke{fill:currentColor;stroke:none;opacity:0}
+.blink{fill:#FF5A5A;stroke:none}
+.cloud{opacity:.8}
+.cards3{display:grid;grid-template-columns:repeat(3,528px);gap:40px}
+.lcard{position:relative;overflow:hidden;background:var(--panel);border-radius:24px;padding:48px;display:flex;flex-direction:column;gap:18px;box-shadow:0 18px 40px rgba(15,27,45,.08)}
+.lcard::before{content:"";position:absolute;left:0;right:0;top:0;height:8px;background:var(--deep);transform-origin:left}
+.lcard .lnum{font-size:96px;color:var(--deep)}
+.ldesc{font-size:30px;line-height:1.4;color:var(--slate)}
+.track{width:740px;height:14px;border-radius:7px;background:rgba(15,27,45,.12);overflow:hidden}
+.fill{height:100%;background:var(--deep);border-radius:7px;transform-origin:left}
+.hl{background:linear-gradient(rgba(255,138,76,.42),rgba(255,138,76,.42)) no-repeat 0 90%/100% 40%;color:inherit}
+.dark .hl{background-image:linear-gradient(rgba(94,224,176,.30),rgba(94,224,176,.30))}
+.warm .hl{background-image:linear-gradient(rgba(15,27,45,.20),rgba(15,27,45,.20))}
+.giant{font-size:340px}
+.bigmark{position:absolute;left:1152px;top:300px;width:640px;font-size:400px;text-align:center;color:transparent;-webkit-text-stroke:2px #2c4166}
+.sl{font-size:22px;font-weight:600;letter-spacing:2px;color:var(--slate)}
+.ilus{font-size:22px;font-weight:600;letter-spacing:2px;background:var(--coral);color:var(--ink);padding:6px 14px;border-radius:8px;white-space:nowrap}
+
+/* SPPT */
+.sppt{position:relative;width:900px;background:var(--panel);border-radius:20px;box-shadow:0 30px 70px rgba(15,27,45,.22);overflow:hidden;color:var(--ink);flex:none}
+.sppt-h{display:flex;justify-content:space-between;align-items:center;background:var(--ink);color:var(--paper);padding:20px 32px;font-size:26px;font-weight:600;letter-spacing:3px}
+.sbody{padding:8px 32px 36px;display:flex;flex-direction:column}
+.srow{display:flex;align-items:center;gap:24px;padding:16px 0;border-bottom:2px dashed rgba(15,27,45,.16)}
+.srow .sl{width:290px;flex:none}
+.sv{font-family:'Space Grotesk',Arial,sans-serif;font-size:32px;font-weight:600;min-height:42px}
+.pv{display:flex;align-items:center;gap:28px}
+.strike{position:relative;color:var(--slate)}
+.strike::after{content:"";position:absolute;left:-4px;right:-4px;top:54%;height:4px;background:var(--deep);transform-origin:left}
+.szero{font-size:60px;color:var(--deep)}
+.stamp{position:absolute;right:34px;bottom:26px;border:5px solid var(--deep);color:var(--deep);font-family:'Space Grotesk',Arial,sans-serif;font-weight:700;font-size:30px;letter-spacing:2px;padding:10px 22px;border-radius:12px;transform:rotate(-12deg);background:rgba(251,249,244,.9)}
+.pt{display:flex;align-items:center;gap:20px;background:var(--panel);border-radius:18px;padding:20px 28px;font-size:32px;font-weight:600;box-shadow:0 14px 30px rgba(15,27,45,.08)}
+.pt b{flex:none;width:48px;height:48px;border-radius:50%;background:var(--deep);color:var(--paper);display:flex;align-items:center;justify-content:center;font-family:'Space Grotesk',Arial,sans-serif;font-size:26px}
+
+/* NIK */
+.ktp{position:relative;width:700px;background:linear-gradient(135deg,#DCEBF8,#B7D3EC);border-radius:22px;color:var(--ink);box-shadow:0 30px 70px rgba(0,0,0,.35);overflow:hidden}
+.ktp-h{display:flex;justify-content:space-between;align-items:center;padding:18px 28px;background:rgba(15,27,45,.92);color:var(--paper);font-size:24px;font-weight:600;letter-spacing:3px}
+.ktp-b{display:flex;gap:28px;padding:28px 28px 20px}
+.ktp-f{flex:1;display:flex;flex-direction:column;gap:6px}
+.nikv{font-family:'Space Grotesk',Arial,sans-serif;font-size:32px;font-weight:700;letter-spacing:1px;min-height:42px;margin-bottom:12px}
+.nm{font-family:'Space Grotesk',Arial,sans-serif;font-size:32px;font-weight:600;min-height:42px}
+.photo{width:170px;height:200px;border-radius:12px;background:rgba(15,27,45,.12);flex:none;display:flex;align-items:flex-end;justify-content:center;overflow:hidden}
+.valid{display:flex;align-items:center;gap:14px;margin:0 28px 28px;padding:12px 22px;background:var(--ink);color:var(--mint);border-radius:14px;font-weight:600;font-size:28px;letter-spacing:2px;width:fit-content}
+.valid svg{width:36px;height:36px}
+.match{display:flex;align-items:center;gap:0;width:700px}
+.chip{background:var(--card);border-radius:14px;padding:14px 20px;font-size:26px;font-weight:600;line-height:1.3;width:300px}
+.chip small{display:block;font-size:22px;letter-spacing:2px;color:var(--soft);font-weight:600}
+.link{flex:1;height:4px;background:var(--mint);transform-origin:left;border-radius:2px}
+.items{display:flex;flex-direction:column;gap:20px}
+.item{position:relative;overflow:hidden;display:flex;align-items:center;gap:28px;background:var(--card);border-radius:20px;padding:18px 28px}
+.item::before{content:"";position:absolute;left:0;top:0;bottom:0;width:8px;background:var(--mint);transform-origin:top}
+.item svg{flex:none;width:48px;height:48px}
+.itxt{font-size:30px;line-height:1.3}
+
+/* latar */
+.bg{position:absolute;inset:0;z-index:-1;pointer-events:none;overflow:hidden}
+.par{position:absolute;inset:0;transform:translate(calc(var(--mx,0)*-26px),calc(var(--my,0)*-18px));transition:transform .8s ease-out}
+.orb{position:absolute;width:780px;height:780px;border-radius:50%;filter:blur(110px)}
+.o1{left:-220px;top:-280px;animation:drift1 24s ease-in-out infinite alternate}
+.o2{right:-260px;bottom:-320px;animation:drift2 28s ease-in-out infinite alternate}
+.dark .o1{background:var(--mint);opacity:.20}.dark .o2{background:var(--coral);opacity:.22}
+.light .o1{background:var(--coral);opacity:.20}.light .o2{background:var(--mint);opacity:.24}
+.warm .o1{background:#FFE2D0;opacity:.7}.warm .o2{background:#fff;opacity:.35}
+.grid{position:absolute;inset:0;background-size:48px 48px;background-image:radial-gradient(circle,var(--dot) 2px,transparent 2.6px)}
+.dark .grid{--dot:rgba(197,206,219,.10)}.light .grid{--dot:rgba(15,27,45,.10)}.warm .grid{--dot:rgba(15,27,45,.12)}
+
+/* navigasi */
+#seg{position:absolute;left:128px;right:128px;top:44px;height:6px;display:flex;gap:10px;z-index:10}
+#seg i{flex:1;background:rgba(150,165,190,.35);border-radius:3px;overflow:hidden}
+#seg b{display:block;height:100%;background:var(--coral);transform:scaleX(0);transform-origin:left;transition:transform .9s var(--ease)}
+#seg i.on b{transform:scaleX(1)}
+#count{position:absolute;right:128px;bottom:64px;font-size:24px;z-index:10;color:var(--soft)}
+#stage[data-theme=light] #seg i{background:rgba(15,27,45,.14)}
+#stage[data-theme=light] #seg b{background:var(--deep)}
+#stage[data-theme=light] #count{color:var(--slate)}
+#stage[data-theme=warm] #seg i{background:rgba(15,27,45,.22)}
+#stage[data-theme=warm] #seg b{background:var(--ink)}
+#stage[data-theme=warm] #count{color:var(--ink)}
+#hint{position:fixed;left:16px;bottom:12px;font:14px Inter,Arial,sans-serif;color:#9aa6b8;z-index:20;transition:opacity 1s}
+
+/* ================= animasi ================= */
+@keyframes wipeNext{from{clip-path:inset(0 0 0 100%)}to{clip-path:inset(0 0 0 0)}}
+@keyframes wipePrev{from{clip-path:inset(0 100% 0 0)}to{clip-path:inset(0 0 0 0)}}
+@keyframes leave{from{transform:none;filter:none}to{transform:scale(.96);filter:brightness(.7)}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(42px);filter:blur(6px)}to{opacity:1;transform:none;filter:blur(0)}}
+@keyframes slideIn{from{opacity:0;transform:translateX(-90px)}to{opacity:1;transform:none}}
+@keyframes slideInR{from{opacity:0;transform:translateX(90px)}to{opacity:1;transform:none}}
+@keyframes zoomIn{from{opacity:0;transform:scale(.88);filter:blur(12px)}to{opacity:1;transform:none;filter:blur(0)}}
+@keyframes eyeIn{from{opacity:0;letter-spacing:16px}to{opacity:1;letter-spacing:6px}}
+@keyframes growX{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@keyframes growY{from{transform:scaleY(0)}to{transform:scaleY(1)}}
+@keyframes draw{from{stroke-dashoffset:1}to{stroke-dashoffset:0}}
+@keyframes discIn{from{opacity:0;transform:scale(.55)}to{opacity:1;transform:none}}
+@keyframes hl{from{background-size:0% 40%}to{background-size:100% 40%}}
+@keyframes sheen{from{transform:translateX(-160%)}to{transform:translateX(420%)}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes drift1{to{transform:translate(180px,120px) scale(1.15)}}
+@keyframes drift2{to{transform:translate(-200px,-110px) scale(1.1)}}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(94,224,176,.45)}70%,100%{box-shadow:0 0 0 30px rgba(94,224,176,0)}}
+@keyframes shimmer{to{background-position:200% center}}
+@keyframes lit{from{opacity:0}to{opacity:1}}
+@keyframes twinkle{50%{opacity:.45}}
+@keyframes smoke{0%{transform:translate(0,0) scale(.6);opacity:0}30%{opacity:.55}100%{transform:translate(16px,-52px) scale(1.6);opacity:0}}
+@keyframes blinkr{50%{opacity:.15}}
+@keyframes cloud{to{transform:translateX(-110px)}}
+@keyframes stamp{0%{opacity:0;transform:rotate(-12deg) scale(2.6)}60%{opacity:1;transform:rotate(-12deg) scale(.93)}100%{opacity:1;transform:rotate(-12deg) scale(1)}}
+/* pola teks */
+@keyframes pMask{from{transform:translateY(112%);opacity:0;filter:blur(10px)}to{transform:none;opacity:1;filter:blur(0)}}
+@keyframes pFlip{from{opacity:0;transform:perspective(700px) rotateX(-95deg) translateY(30%)}to{opacity:1;transform:none}}
+@keyframes pZoomOut{from{opacity:0;transform:scale(2.4);filter:blur(16px)}to{opacity:1;transform:none;filter:blur(0)}}
+@keyframes pFocus{from{opacity:0;transform:scale(1.12);filter:blur(18px)}to{opacity:1;transform:none;filter:blur(0)}}
+@keyframes pTilt{from{opacity:0;transform:translateY(70px) rotate(8deg);filter:blur(6px)}to{opacity:1;transform:none;filter:blur(0)}}
+@keyframes pDrop{from{opacity:0;transform:translateY(-130%);filter:blur(8px)}to{opacity:1;transform:none;filter:blur(0)}}
+@keyframes pSlider{from{opacity:0;transform:translateX(70px);filter:blur(10px)}to{opacity:1;transform:none;filter:blur(0)}}
+@keyframes pChar{from{opacity:0;transform:translateY(40%);filter:blur(12px)}to{opacity:1;transform:none;filter:blur(0)}}
+@keyframes pCurtain{from{clip-path:inset(-20px 100% -20px 0);transform:translateX(-40px)}to{clip-path:inset(-20px -20px -20px -20px);transform:none}}
+
+.w{display:inline-block;vertical-align:bottom}
+.w>span{display:inline-block}
+.fx-mask .w{overflow:hidden;padding:0 .04em .14em;margin-bottom:-.14em}
+.wd{display:inline-block;white-space:nowrap}
+.c{display:inline-block}
+.active .fx-mask .w>span{animation:pMask 1.1s var(--ease) both;animation-delay:calc(var(--base) + var(--i)*90ms)}
+.active .fx-flip .w>span{transform-origin:50% 100%;animation:pFlip 1.2s var(--ease) both;animation-delay:calc(var(--base) + var(--i)*130ms)}
+.active .fx-zoomout .w>span{animation:pZoomOut 1.3s var(--ease) both;animation-delay:calc(var(--base) + var(--i)*160ms)}
+.active .fx-focus .w>span{animation:pFocus 1.3s var(--ease) both;animation-delay:calc(var(--base) + var(--i)*140ms)}
+.active .fx-tilt .w>span{transform-origin:0 100%;animation:pTilt 1.2s var(--ease) both;animation-delay:calc(var(--base) + var(--i)*140ms)}
+.active .fx-drop .c{animation:pDrop 1s var(--ease) both;animation-delay:calc(var(--base) + var(--i)*45ms)}
+.active .fx-slider .c{animation:pSlider 1s var(--ease) both;animation-delay:calc(var(--base) + var(--i)*40ms)}
+.active .fx-char .c{animation:pChar 1.1s var(--ease) both;animation-delay:calc(var(--base) + var(--d,0s) + var(--i)*110ms)}
+.active .fx-curtain{animation:pCurtain 1.5s var(--ease) both;animation-delay:var(--base)}
+[data-scramble]{min-height:1.05em;white-space:nowrap}
+.typing::after{content:"";display:inline-block;width:4px;height:.9em;margin-left:6px;background:currentColor;vertical-align:-.1em;animation:blinkr 1s steps(1) infinite}
+
+.active .fx{animation:fadeUp 1.1s var(--ease) both;animation-delay:calc(var(--base) + var(--i,0)*130ms)}
+.active .sx{animation:slideIn 1s var(--ease) both;animation-delay:calc(var(--base) + var(--i,0)*150ms)}
+.active .sxr{animation:slideInR 1s var(--ease) both;animation-delay:calc(var(--base) + var(--i,0)*150ms)}
+.active .zx{animation:zoomIn 1.3s var(--ease) both;animation-delay:calc(var(--base) + var(--i,0)*130ms)}
+.active .eyebrow{animation:eyeIn 1.1s var(--ease) both;animation-delay:var(--base)}
+.active .eyebrow::before{animation:growX 1s var(--ease) both;animation-delay:var(--base)}
+.active .card::before,.active .lcard::before{animation:growX 1s var(--ease) both;animation-delay:calc(var(--base) + var(--i,0)*130ms + 250ms)}
+.active .card::after{animation:sheen 1.4s ease-in-out both;animation-delay:calc(var(--base) + var(--i,0)*130ms + 900ms)}
+.active .item::before{animation:growY .8s var(--ease) both;animation-delay:calc(var(--base) + var(--i,0)*150ms + 200ms)}
+.draw{stroke-dasharray:1;stroke-dashoffset:0}
+.active .draw{animation:draw 1.8s var(--ease) both;animation-delay:calc(var(--base) + var(--i,0)*150ms)}
+.active .growx{animation:growX 1.8s var(--ease) both;animation-delay:calc(var(--base) + var(--i,0)*150ms)}
+.active .hl{animation:hl 1.1s var(--ease) both;animation-delay:calc(var(--base) + var(--i,0)*130ms + 700ms)}
+.active .disc{animation:discIn 1.4s var(--ease) both;animation-delay:calc(var(--base) + .25s)}
+.disc{transform-origin:50% 50%}
+.spin{transform-origin:50% 50%;animation:spin 70s linear infinite}
+.shine{background:linear-gradient(90deg,#5EE0B0,#FF8A4C,#5EE0B0);background-size:200% auto;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shimmer 5s linear infinite}
+.active .shine.fx{animation:fadeUp 1.1s var(--ease) both,shimmer 5s linear infinite;animation-delay:calc(var(--base) + var(--i,0)*130ms),0s}
+/* bangunan */
+.active .win{animation:lit .6s ease both;animation-delay:calc(var(--base) + 1.6s + var(--i,0)*110ms)}
+.active .win.tw{animation:lit .6s ease both,twinkle 5s ease-in-out infinite;animation-delay:calc(var(--base) + 1.6s + var(--i,0)*110ms),calc(var(--base) + 4.5s + var(--i,0)*300ms)}
+.active .smoke{animation:smoke 3.6s ease-out infinite;animation-delay:calc(var(--base) + 2.6s + var(--i,0)*1.2s)}
+.active .blink{animation:blinkr 1.6s steps(1) infinite}
+.cloud{animation:cloud 14s ease-in-out infinite alternate}
+.hf{fill:var(--ink);stroke:none}
+.active .hf{animation:lit 1s ease both;animation-delay:calc(var(--base) + 2.4s)}
+.dim{opacity:.55}
+/* SPPT & NIK */
+.active .strike::after{animation:growX .6s var(--ease) both;animation-delay:calc(var(--base) + 3.9s)}
+.active .szero{animation:zoomIn 1s var(--ease) both;animation-delay:calc(var(--base) + 4.3s)}
+.active .stamp{animation:stamp .7s cubic-bezier(.2,.9,.3,1.2) both;animation-delay:calc(var(--base) + 4.9s)}
+.active .link{animation:growX 1s var(--ease) both;animation-delay:calc(var(--base) + 4.2s)}
+
+@media (prefers-reduced-motion:reduce){
+ *,*::before,*::after{animation:none!important;transition:none!important}
+}
+</style>
+</head>
+<body>
+<div id="stage" data-theme="dark">
+<div id="seg"></div>
+
+<!-- 1 cover · pola: topeng naik per kata -->
+<section class="slide dark" data-theme="dark">
+<div class="bg"><div class="par"><i class="orb o1"></i><i class="orb o2"></i></div><div class="grid"></div></div>
+<svg style="position:absolute;left:1152px;top:220px" width="640" height="640" viewBox="0 0 640 640" fill="none" aria-hidden="true">
+<circle class="draw" pathLength="1" cx="320" cy="320" r="304" stroke="#FF8A4C" stroke-width="3" transform="rotate(-90 320 320)"/>
+<circle class="spin" cx="320" cy="320" r="274" stroke="#5EE0B0" stroke-width="2" stroke-dasharray="4 16" opacity=".75"/>
+<circle class="disc" cx="320" cy="320" r="236" fill="#FF8A4C"/>
+</svg>
+<div class="col">
+<p class="eyebrow">KEPGUB DKI JAKARTA NO. 339 TAHUN 2026</p>
+<h1 data-split="words" data-fx="mask">PBB-P2 Jakarta</h1>
+<p class="serif shine fx" style="--i:7;font-size:96px;width:fit-content">pokok pajaknya Rp0.</p>
+<p class="lead fx" style="--i:9">Ringkasan syarat dan cara mengurusnya bagi Wajib Pajak orang pribadi.</p>
+</div>
+<p class="numtxt" data-split="chars" data-fx="char" style="--d:.7s;position:absolute;left:1152px;top:430px;width:640px;text-align:center;font-size:200px;color:#0F1B2D">Rp0</p>
+<p class="foot">Sumber: Bapenda DKI Jakarta</p>
+</section>
+
+<!-- 2 kebijakan · pola: mesin ketik -->
+<section class="slide light" data-theme="light">
+<div class="bg"><div class="par"><i class="orb o1"></i><i class="orb o2"></i></div><div class="grid"></div></div>
+<div class="row">
+<div style="width:800px;display:flex;flex-direction:column;gap:24px">
+<p class="eyebrow">APA KEBIJAKANNYA?</p>
+<p class="numtxt zx" style="--i:1;font-size:360px;color:#B93A0A"><span data-count="100" data-suffix="%">100%</span></p>
+<div class="track"><div class="fill growx" style="--i:4"></div></div>
+</div>
+<div style="width:760px;display:flex;flex-direction:column;gap:28px">
+<p class="serif" data-type="pembebasan pokok PBB-P2, otomatis." data-td="700" style="font-size:72px;min-height:160px"></p>
+<p class="lead fx" style="--i:9">Berlaku bagi Wajib Pajak orang pribadi. SPPT terbit dengan nilai Rp0 <span class="hl" style="--i:9">tanpa perlu mengajukan permohonan.</span></p>
+<p class="pill pill-ink fx" style="--i:11">Kepgub No. 339 Tahun 2026</p>
+</div>
+</div>
+<p class="foot">Sumber: bapenda.jakarta.go.id</p>
+</section>
+
+<!-- 3 syarat · pola: huruf jatuh dari atas, kartu bergantian kiri-kanan -->
+<section class="slide dark" data-theme="dark">
+<div class="bg"><div class="par"><i class="orb o1"></i><i class="orb o2"></i></div><div class="grid"></div></div>
+<p class="eyebrow">SYARAT PENERIMA</p>
+<h2 data-split="chars" data-fx="drop">4 syarat, semuanya harus terpenuhi</h2>
+<div class="cards4">
+<div class="card sx" style="--i:6"><p class="serif cnum">01</p><h3>Jenis dan NJOP</h3><p class="cdesc">Rumah tapak atau rusun/apartemen di bawah batas NJOP.</p></div>
+<div class="card sxr" style="--i:7"><p class="serif cnum">02</p><h3>Wajib Pajak</h3><p class="cdesc">Dimiliki dan atas nama orang pribadi, bukan badan usaha.</p></div>
+<div class="card sx" style="--i:8"><p class="serif cnum">03</p><h3>Kuota</h3><p class="cdesc">Hanya 1 objek pajak per Wajib Pajak.</p></div>
+<div class="card sxr" style="--i:9"><p class="serif cnum">04</p><h3>NIK valid</h3><p class="cdesc">Terdaftar, tervalidasi, dan cocok dengan data Dukcapil.</p></div>
+</div>
+<p class="foot">Sumber: Bapenda DKI Jakarta · DPP Jakarta</p>
+</section>
+
+<!-- 4 njop · pola: teks diacak lalu terbaca -->
+<section class="slide light" data-theme="light">
+<div class="bg"><div class="par"><i class="orb o1"></i><i class="orb o2"></i></div><div class="grid"></div></div>
+<p class="eyebrow">BATAS NJOP</p>
+<h2 data-scramble="Dua jenis properti yang bebas">Dua jenis properti yang bebas</h2>
+<div class="duo">
+<div class="blk blk-a zx" style="--i:2">
+<svg class="scene" data-scene="house" viewBox="0 0 680 200" aria-label="Ilustrasi rumah tapak"></svg>
+<p class="tag">RUMAH TAPAK</p>
+<p class="numtxt num"><span data-count="2" data-prefix="Rp" data-suffix=" miliar">Rp2 miliar</span></p>
+<p class="note">NJOP maksimal Rp2.000.000.000</p>
+</div>
+<div class="blk blk-b zx" style="--i:4">
+<svg class="scene" data-scene="apartment" viewBox="0 0 680 200" aria-label="Ilustrasi apartemen"></svg>
+<p class="tag">RUSUN / APARTEMEN</p>
+<p class="numtxt num"><span data-count="650" data-prefix="Rp" data-suffix=" juta">Rp650 juta</span></p>
+<p class="note">NJOP maksimal Rp650.000.000</p>
+</div>
+</div>
+<p class="foot">Sumber: Bapenda DKI Jakarta</p>
+</section>
+
+<!-- 5 wajib pajak · pola: kata terbalik 3D -->
+<section class="slide light" data-theme="light">
+<div class="bg"><div class="par"><i class="orb o1"></i><i class="orb o2"></i></div><div class="grid"></div></div>
+<p class="eyebrow">SYARAT 02 · WAJIB PAJAK</p>
+<h2 data-split="words" data-fx="flip">Atas nama orang pribadi</h2>
+<div class="duo">
+<div class="blk blk-a sx" style="--i:4">
+<svg class="ico" viewBox="0 0 64 64" fill="none" stroke="#5EE0B0" stroke-width="3" stroke-linecap="round" aria-hidden="true"><circle class="draw" pathLength="1" style="--i:7" cx="32" cy="22" r="10"/><path class="draw" pathLength="1" style="--i:8" d="M12 54 C12 40 22 36 32 36 C42 36 52 40 52 54"/></svg>
+<p class="tag">ORANG PRIBADI</p>
+<p class="numtxt num" data-split="chars" data-fx="char" style="--d:.9s">Berhak</p>
+<p class="note">Objek pajak dimiliki dan tertulis atas nama Wajib Pajak orang pribadi.</p>
+</div>
+<div class="blk blk-b sxr" style="--i:6">
+<svg class="ico" viewBox="0 0 64 64" fill="none" stroke="#0F1B2D" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path class="draw" pathLength="1" style="--i:9" d="M14 56 V10 H42 V56 M42 24 H52 V56 M6 56 H58 M22 20 H34 M22 30 H34 M22 40 H34"/></svg>
+<p class="tag">BADAN USAHA / PERUSAHAAN</p>
+<p class="numtxt num" data-split="chars" data-fx="char" style="--d:1.2s">Tidak</p>
+<p class="note">Objek pajak atas nama badan usaha tidak memenuhi syarat pembebasan ini.</p>
+</div>
+</div>
+<p class="lead fx" style="--i:9">Properti baru dibeli atau pemilik lama sudah meninggal? Ajukan mutasi atau balik nama ke pemilik yang masih hidup.</p>
+<p class="foot">Sumber: DPP Jakarta · Bapenda DKI Jakarta</p>
+</section>
+
+<!-- 6 satu objek · pola: tirai terbuka dari kiri -->
+<section class="slide warm" data-theme="warm">
+<div class="bg"><div class="par"><i class="orb o1"></i><i class="orb o2"></i></div><div class="grid"></div></div>
+<div class="row">
+<div style="position:relative;width:460px;height:460px;flex:none;display:flex;align-items:center;justify-content:center">
+<svg style="position:absolute;inset:0" width="460" height="460" viewBox="0 0 460 460" fill="none" aria-hidden="true"><circle class="draw" pathLength="1" cx="230" cy="230" r="222" stroke="#0F1B2D" stroke-width="4" transform="rotate(-90 230 230)"/></svg>
+<p class="numtxt giant zx" style="--i:2;color:#0F1B2D">1</p>
+</div>
+<div style="width:1124px;display:flex;flex-direction:column;gap:28px">
+<p class="eyebrow">KUOTA PEMBEBASAN</p>
+<h2 class="fx-curtain" style="font-size:96px">objek dibebaskan per Wajib Pajak</h2>
+<p class="lead fx" style="--i:6">Punya lebih dari satu properti di Jakarta? Sistem otomatis memilih objek dengan <span class="hl" style="--i:6">NJOP paling tinggi</span> untuk dibebaskan.</p>
+<svg data-scene="houses3" width="1124" height="230" viewBox="0 0 1124 230" style="color:#0F1B2D;overflow:visible" aria-label="Tiga properti, objek dengan NJOP tertinggi dibebaskan"></svg>
+</div>
+</div>
+<p class="foot">Sumber: Bapenda DKI Jakarta · DPP Jakarta</p>
+</section>
+
+<!-- 7 simulasi SPPT · pola: huruf masuk dari kanan -->
+<section class="slide light" data-theme="light">
+<div class="bg"><div class="par"><i class="orb o1"></i><i class="orb o2"></i></div><div class="grid"></div></div>
+<div class="row" style="gap:64px">
+<div class="sppt zx" style="--i:1">
+<div class="sppt-h"><span>SPPT PBB-P2 · CONTOH</span><span class="ilus">ILUSTRASI · DATA FIKTIF</span></div>
+<div class="sbody">
+<div class="srow"><p class="sl">NOP</p><p class="sv" data-type="00.00.000.000.000-0000.0" data-td="900"></p></div>
+<div class="srow"><p class="sl">NAMA WAJIB PAJAK</p><p class="sv" data-type="ANDI CONTOH" data-td="1700"></p></div>
+<div class="srow"><p class="sl">LETAK OBJEK PAJAK</p><p class="sv" data-type="Jl. Contoh No. 1, Jakarta" data-td="2300"></p></div>
+<div class="srow"><p class="sl">NJOP BUMI + BANGUNAN</p><p class="sv" data-type="Rp1.500.000.000" data-td="3200"></p></div>
+<div class="srow" style="border-bottom:none;min-height:110px"><p class="sl">POKOK PBB-P2</p><div class="pv"><span class="sv strike" data-type="Rp3.000.000" data-td="3900"></span><span class="sv numtxt szero">Rp0</span></div></div>
+</div>
+<div class="stamp">DIBEBASKAN 100%</div>
+</div>
+<div style="width:700px;display:flex;flex-direction:column;gap:24px">
+<p class="eyebrow">SIMULASI SPPT</p>
+<h2 data-split="chars" data-fx="slider" style="font-size:72px">Dari tagihan menjadi Rp0</h2>
+<div class="pt fx" style="--i:5"><b>1</b>NJOP di bawah batas</div>
+<div class="pt fx" style="--i:6"><b>2</b>Atas nama orang pribadi</div>
+<div class="pt fx" style="--i:7"><b>3</b>Pokok PBB-P2 menjadi Rp0</div>
+</div>
+</div>
+<p class="foot">Ilustrasi dengan data fiktif, bukan dokumen resmi · Sumber syarat: Bapenda DKI Jakarta</p>
+</section>
+
+<!-- 8 simulasi NIK · pola: fokus dari buram -->
+<section class="slide dark" data-theme="dark">
+<div class="bg"><div class="par"><i class="orb o1"></i><i class="orb o2"></i></div><div class="grid"></div></div>
+<div class="row" style="gap:64px;align-items:center">
+<div style="width:900px;display:flex;flex-direction:column;gap:24px">
+<p class="eyebrow">SYARAT NIK</p>
+<h2 data-split="words" data-fx="focus" style="font-size:72px">NIK harus valid dan sinkron</h2>
+<div class="items">
+<div class="item sx" style="--i:4"><svg viewBox="0 0 56 56" fill="none" aria-hidden="true"><path class="draw" pathLength="1" style="--i:5" d="M10 29 L23 42 L46 15" stroke="#5EE0B0" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/></svg><p class="itxt">NIK terdaftar dan tervalidasi di sistem pajak daerah</p></div>
+<div class="item sx" style="--i:5"><svg viewBox="0 0 56 56" fill="none" aria-hidden="true"><path class="draw" pathLength="1" style="--i:6" d="M10 29 L23 42 L46 15" stroke="#5EE0B0" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/></svg><p class="itxt">Data cocok dengan Dukcapil</p></div>
+<div class="item sx" style="--i:6"><svg viewBox="0 0 56 56" fill="none" aria-hidden="true"><path class="draw" pathLength="1" style="--i:7" d="M10 29 L23 42 L46 15" stroke="#5EE0B0" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/></svg><p class="itxt">Pemilik masih hidup</p></div>
+<div class="item sx" style="--i:7"><svg viewBox="0 0 56 56" fill="none" aria-hidden="true"><path class="draw" pathLength="1" style="--i:8" d="M10 29 L23 42 L46 15" stroke="#5EE0B0" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/></svg><p class="itxt">Nama di KTP sama persis dengan nama di SPPT (penulisan dan urutan)</p></div>
+</div>
+</div>
+<div style="width:700px;display:flex;flex-direction:column;gap:26px">
+<div class="ktp zx" style="--i:2">
+<div class="ktp-h"><span>KARTU IDENTITAS · CONTOH</span><span class="ilus">ILUSTRASI</span></div>
+<div class="ktp-b">
+<div class="ktp-f">
+<p class="sl">NIK</p><p class="nikv" data-type="1234 5678 9012 3456" data-td="1200"></p>
+<p class="sl">NAMA</p><p class="nm" data-type="ANDI CONTOH" data-td="2400"></p>
+</div>
+<div class="photo"><svg width="120" height="150" viewBox="0 0 120 150" fill="none" stroke="#3B465A" stroke-width="4" stroke-linecap="round" aria-hidden="true"><circle cx="60" cy="58" r="26"/><path d="M12 150 C12 110 34 98 60 98 C86 98 108 110 108 150"/></svg></div>
+</div>
+<div class="valid zx" style="animation-delay:calc(var(--base) + 3.4s)"><svg viewBox="0 0 56 56" fill="none" aria-hidden="true"><path class="draw" pathLength="1" style="--i:24" d="M10 29 L23 42 L46 15" stroke="#5EE0B0" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/></svg>TERVALIDASI</div>
+</div>
+<div class="match">
+<div class="chip fx" style="--i:20"><small>NAMA DI KTP</small>ANDI CONTOH</div>
+<div class="link"></div>
+<div class="chip fx" style="--i:22"><small>NAMA DI SPPT</small>ANDI CONTOH</div>
+</div>
+<p class="pill pill-mint fx" style="--i:28;font-size:28px;padding:14px 32px">COCOK · NAMA SAMA PERSIS</p>
+</div>
+</div>
+<p class="foot">Ilustrasi dengan data fiktif · Sumber syarat: DPP Jakarta · Bapenda DKI Jakarta</p>
+</section>
+
+<!-- 9 langkah · pola: kata mengecil dari besar -->
+<section class="slide light" data-theme="light">
+<div class="bg"><div class="par"><i class="orb o1"></i><i class="orb o2"></i></div><div class="grid"></div></div>
+<p class="eyebrow">SPPT BELUM Rp0?</p>
+<h2 data-split="words" data-fx="zoomout">Cek 3 langkah ini</h2>
+<p class="lead fx" style="--i:5">Penyebab paling umum: NIK belum tervalidasi atau pemilik lama sudah meninggal dunia.</p>
+<div class="cards3">
+<div class="lcard fx" style="--i:6"><p class="serif lnum">1</p><h3>Update NIK online</h3><p class="ldesc">Buka Pajak Online Jakarta, pilih PBB, lalu Tambah Permohonan Pelayanan dan Update NIK. Unggah dokumen yang diminta.</p></div>
+<div class="lcard fx" style="--i:8"><p class="serif lnum">2</p><h3>Balik nama</h3><p class="ldesc">Nama di SPPT sudah meninggal atau properti baru dibeli? Ajukan mutasi ke pemilik yang masih hidup.</p></div>
+<div class="lcard fx" style="--i:10"><p class="serif lnum">3</p><h3>Cek e-SPPT</h3><p class="ldesc">Pantau status validasi dan unduh SPPT terbaru di portal e-SPPT PBB Jakarta.</p></div>
+</div>
+<p class="foot">Sumber: DPP Jakarta · pajakonline.jakarta.go.id</p>
+</section>
+
+<!-- 10 penutup · pola: kata miring naik -->
+<section class="slide dark" data-theme="dark">
+<div class="bg"><div class="par"><i class="orb o1"></i><i class="orb o2"></i></div><div class="grid"></div></div>
+<p class="serif bigmark zx" style="--i:0">Rp0</p>
+<div class="col">
+<p class="eyebrow">LANGKAH BERIKUTNYA</p>
+<h1 data-split="words" data-fx="tilt" style="font-size:120px">Cek SPPT dan NIK Anda</h1>
+<p class="serif shine fx" style="--i:8;font-size:96px;width:fit-content">sebelum tagihan terbit.</p>
+<p class="pill pill-mint fx" style="--i:10">pajakonline.jakarta.go.id</p>
+</div>
+<p class="foot">Sumber: bapenda.jakarta.go.id · dpp.jakarta.go.id</p>
+</section>
+
+<p id="count"></p>
+</div>
+<p id="hint">Panah / spasi / klik / geser untuk berpindah slide · F = layar penuh</p>
+
+<script>
+(function(){
+  var stage=document.getElementById('stage'),
+      slides=[].slice.call(document.querySelectorAll('.slide')),
+      seg=document.getElementById('seg'),
+      count=document.getElementById('count'),
+      reduce=matchMedia('(prefers-reduced-motion: reduce)').matches,
+      cur=-1,timers=[];
+
+  function fit(){var s=Math.min(innerWidth/1920,innerHeight/1080);stage.style.transform='translate(-50%,-50%) scale('+s+')';}
+  addEventListener('resize',fit);fit();
+
+  slides.forEach(function(){var i=document.createElement('i');i.innerHTML='<b></b>';seg.appendChild(i);});
+  var segs=[].slice.call(seg.children);
+
+  /* ---------- ilustrasi bangunan ---------- */
+  var D=function(d,i){return '<path class="draw" pathLength="1" d="'+d+'" style="--i:'+i+'"/>';};
+  var scenes={
+    house:function(){
+      return D('M0 200 H680',0)+D('M60 200 V112 H220 V200',1)+D('M44 114 L140 40 L236 114 Z',2)
+        +D('M190 78 V44 H210 V90',3)+D('M118 200 V152 H152 V200',4)
+        +'<rect class="win" x="78" y="128" width="26" height="26" style="--i:0"/>'
+        +'<rect class="win tw" x="170" y="128" width="26" height="26" style="--i:2"/>'
+        +'<circle class="draw" pathLength="1" cx="320" cy="140" r="34" style="--i:5"/>'+D('M320 174 V200',5)
+        +'<circle class="draw" pathLength="1" cx="580" cy="64" r="28" style="--i:6"/>'
+        +'<circle class="smoke" cx="200" cy="34" r="6" style="--i:0"/><circle class="smoke" cx="200" cy="34" r="6" style="--i:1"/><circle class="smoke" cx="200" cy="34" r="6" style="--i:2"/>'
+        +'<g class="cloud"><path d="M430 70 q10 -20 30 -12 q14 -16 32 2 q18 0 14 16 H430 Z"/></g>';
+    },
+    apartment:function(){
+      var s=D('M0 200 H680',0)+D('M70 200 V26 H230 V200',1)+D('M150 26 V12',2)+'<circle class="blink" cx="150" cy="9" r="4"/>'+D('M130 200 V176 H170 V200',3);
+      var r,c,i;
+      for(r=0;r<6;r++)for(c=0;c<3;c++){i=(5-r)*3+c;s+='<rect class="win'+(((r*3+c)%5===2)?' tw':'')+'" x="'+(88+c*44)+'" y="'+(44+r*22)+'" width="28" height="14" style="--i:'+i+'"/>';}
+      s+=D('M270 200 V96 H380 V200',2);
+      for(r=0;r<4;r++)for(c=0;c<2;c++){i=(3-r)*2+c+4;s+='<rect class="win'+(((r*2+c)%3===1)?' tw':'')+'" x="'+(286+c*46)+'" y="'+(112+r*22)+'" width="28" height="14" style="--i:'+i+'"/>';}
+      s+=D('M410 200 V136 H500 V200',3);
+      for(r=0;r<2;r++)for(c=0;c<2;c++){i=(1-r)*2+c+8;s+='<rect class="win" x="'+(424+c*34)+'" y="'+(152+r*24)+'" width="24" height="14" style="--i:'+i+'"/>';}
+      s+='<g class="cloud"><path d="M540 70 q10 -20 30 -12 q14 -16 32 2 q18 0 14 16 H540 Z"/></g>';
+      return s;
+    },
+    houses3:function(){
+      var xs=[110,470,830],s='<path class="draw" pathLength="1" d="M0 170 H1124" style="--i:0"/>';
+      for(var k=0;k<3;k++){
+        var top=(k===2);
+        s+='<g transform="translate('+xs[k]+',40)" class="'+(top?'':'dim')+'">';
+        if(top)s+='<path class="hf" d="M0 70 L60 20 L120 70 H110 V130 H10 V70 Z"/>';
+        s+=D('M10 130 V70 H110 V130',1+k*2)+D('M-6 72 L60 20 L126 72 Z',2+k*2)+D('M50 130 V100 H70 V130',3+k*2);
+        s+='<text class="fx" style="--i:'+(6+k)+'" x="60" y="165" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="24" font-weight="600" fill="currentColor" stroke="none">'+(top?'NJOP tertinggi':'NJOP lebih rendah')+'</text>';
+        if(top)s+='<text class="fx" style="--i:9" x="60" y="-2" text-anchor="middle" font-family="Space Grotesk,Arial,sans-serif" font-size="44" font-weight="700" fill="currentColor" stroke="none">Rp0</text>';
+        s+='</g>';
+      }
+      return s;
+    }
+  };
+  document.querySelectorAll('[data-scene]').forEach(function(el){el.innerHTML=scenes[el.getAttribute('data-scene')]();});
+
+  /* ---------- pecah teks ---------- */
+  document.querySelectorAll('[data-split]').forEach(function(el){
+    var mode=el.getAttribute('data-split'),fx=el.getAttribute('data-fx')||'mask',txt=el.textContent.trim(),words=txt.split(' '),idx=0;
+    el.setAttribute('aria-label',txt);el.textContent='';el.classList.add('fx-'+fx);
+    words.forEach(function(w,k){
+      if(mode==='words'){
+        var o=document.createElement('span');o.className='w';o.setAttribute('aria-hidden','true');
+        var n=document.createElement('span');n.textContent=w;n.style.setProperty('--i',k);
+        o.appendChild(n);el.appendChild(o);
+      }else{
+        var wd=document.createElement('span');wd.className='wd';wd.setAttribute('aria-hidden','true');
+        w.split('').forEach(function(ch){var c=document.createElement('span');c.className='c';c.textContent=ch;c.style.setProperty('--i',idx++);wd.appendChild(c);});
+        idx++;el.appendChild(wd);
+      }
+      if(k<words.length-1)el.appendChild(document.createTextNode(' '));
+    });
+  });
+  document.querySelectorAll('[data-type]').forEach(function(el){el.textContent='';});
+  document.querySelectorAll('[data-scramble]').forEach(function(el){el.setAttribute('aria-label',el.getAttribute('data-scramble'));});
+
+  function clearTimers(){timers.forEach(function(t){clearTimeout(t);cancelAnimationFrame(t);});timers=[];}
+
+  function finalize(sl){
+    sl.querySelectorAll('[data-type]').forEach(function(e){e.textContent=e.getAttribute('data-type');e.classList.remove('typing');});
+    sl.querySelectorAll('[data-scramble]').forEach(function(e){e.textContent=e.getAttribute('data-scramble');e.style.visibility='visible';});
+    sl.querySelectorAll('[data-count]').forEach(function(e){e.textContent=(e.getAttribute('data-prefix')||'')+e.getAttribute('data-count')+(e.getAttribute('data-suffix')||'');});
+  }
+
+  function typeIn(el){
+    var full=el.getAttribute('data-type'),td=+(el.getAttribute('data-td')||0);
+    if(reduce){el.textContent=full;return;}
+    el.textContent='';
+    timers.push(setTimeout(function(){
+      el.classList.add('typing');var k=0;
+      (function tick(){
+        el.textContent=full.slice(0,++k);
+        if(k<full.length)timers.push(setTimeout(tick,38));
+        else timers.push(setTimeout(function(){el.classList.remove('typing');},700));
+      })();
+    },550+td));
+  }
+
+  function scramble(el){
+    var fin=el.getAttribute('data-scramble'),pool='ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789#%&';
+    if(reduce){el.textContent=fin;return;}
+    el.textContent='';el.style.visibility='visible';
+    timers.push(setTimeout(function(){
+      var t0=performance.now(),dur=1500;
+      (function frame(){
+        var p=Math.min((performance.now()-t0)/dur,1),done=Math.floor(p*fin.length),out='';
+        for(var i=0;i<fin.length;i++){
+          var ch=fin.charAt(i);
+          out+=(i<done||ch===' ')?ch:pool.charAt(Math.floor(Math.random()*pool.length));
+        }
+        el.textContent=out;
+        if(p<1)timers.push(setTimeout(frame,40));else el.textContent=fin;
+      })();
+    },700));
+  }
+
+  function countUp(el){
+    var target=+el.getAttribute('data-count'),pre=el.getAttribute('data-prefix')||'',suf=el.getAttribute('data-suffix')||'';
+    if(reduce){el.textContent=pre+target+suf;return;}
+    el.textContent=pre+'0'+suf;
+    var start=null,dur=1900;
+    function step(ts){
+      if(start===null)start=ts;
+      var p=Math.min((ts-start)/dur,1),e=p>=1?1:1-Math.pow(2,-10*p);
+      el.textContent=pre+Math.round(target*e)+suf;
+      if(p<1)timers.push(requestAnimationFrame(step));
+    }
+    timers.push(setTimeout(function(){timers.push(requestAnimationFrame(step));},650));
+  }
+
+  function show(n){
+    n=Math.max(0,Math.min(slides.length-1,n));
+    if(n===cur)return;
+    var dir=n>=cur?'next':'prev',old=slides[cur],nw=slides[n];
+    clearTimers();
+    slides.forEach(function(s){if(s!==old)s.classList.remove('leaving');});
+    if(old){finalize(old);old.classList.remove('active','next','prev');old.classList.add('leaving');
+      (function(o){setTimeout(function(){if(o!==slides[cur])o.classList.remove('leaving');},1100);})(old);}
+    nw.classList.remove('leaving','next','prev');
+    void nw.offsetWidth;
+    nw.classList.add('active');
+    if(cur!==-1)nw.classList.add(dir);
+    cur=n;
+    nw.querySelectorAll('[data-type]').forEach(typeIn);
+    nw.querySelectorAll('[data-scramble]').forEach(scramble);
+    nw.querySelectorAll('[data-count]').forEach(countUp);
+    segs.forEach(function(s,k){s.classList.toggle('on',k<=cur);});
+    count.textContent=(cur+1)+' / '+slides.length;
+    stage.setAttribute('data-theme',nw.getAttribute('data-theme'));
+    history.replaceState(null,'','#'+(cur+1));
+  }
+  function next(){show(cur+1)}function prev(){show(cur-1)}
+
+  addEventListener('keydown',function(e){
+    if(['ArrowRight','ArrowDown','PageDown',' ','Enter'].indexOf(e.key)>-1){e.preventDefault();next();}
+    else if(['ArrowLeft','ArrowUp','PageUp','Backspace'].indexOf(e.key)>-1){e.preventDefault();prev();}
+    else if(e.key==='Home')show(0);
+    else if(e.key==='End')show(slides.length-1);
+    else if(e.key==='f'||e.key==='F'){document.fullscreenElement?document.exitFullscreen():document.documentElement.requestFullscreen&&document.documentElement.requestFullscreen();}
+  });
+  document.addEventListener('click',function(e){if(e.clientX<innerWidth*0.3)prev();else next();});
+  var sx=null;
+  addEventListener('touchstart',function(e){sx=e.touches[0].clientX;},{passive:true});
+  addEventListener('touchend',function(e){
+    if(sx===null)return;var dx=e.changedTouches[0].clientX-sx;sx=null;
+    if(Math.abs(dx)>50){dx<0?next():prev();}
+  });
+  if(!reduce)addEventListener('mousemove',function(e){
+    stage.style.setProperty('--mx',((e.clientX/innerWidth-.5)*2).toFixed(3));
+    stage.style.setProperty('--my',((e.clientY/innerHeight-.5)*2).toFixed(3));
+  });
+
+  var st=parseInt((location.hash||'').slice(1),10);
+  show(isNaN(st)?0:st-1);
+  setTimeout(function(){document.getElementById('hint').style.opacity=0;},6000);
+})();
+</script>
+</body>
+</html>
